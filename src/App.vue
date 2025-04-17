@@ -4,13 +4,13 @@
 </template>
 
 <script>
-import TheResources from './components/learning-resources/TheResources.vue'
+import TheResources from './components/learning-resources/TheResources.vue';
 
 export default {
   components: {
     TheResources,
   },
-}
+};
 </script>
 
 <style>

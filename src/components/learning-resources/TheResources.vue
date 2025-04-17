@@ -1,9 +1,13 @@
 <template>
   <base-card>
-    <base-button @click="setSelectedTab('stored-resources')" :mode="storedResButtonMode"
+    <base-button
+      @click="setSelectedTab('stored-resources')"
+      :mode="storedResButtonMode"
       >Stored Resources</base-button
     >
-    <base-button @click="setSelectedTab('add-resource')" :mode="addResButtonMode"
+    <base-button
+      @click="setSelectedTab('add-resource')"
+      :mode="addResButtonMode"
       >Add Resource</base-button
     >
   </base-card>
@@ -14,8 +18,8 @@
 </template>
 
 <script>
-import AddResource from './AddResource.vue'
-import StoredResources from './StoredResources.vue'
+import AddResource from './AddResource.vue';
+import StoredResources from './StoredResources.vue';
 
 export default {
   components: {
@@ -39,17 +43,18 @@ export default {
           link: 'https://google.org',
         },
       ],
-    }
+    };
   },
   provide() {
     return {
       resources: this.storedResources,
       addResource: this.addResource,
-    }
+      deleteResource: this.removeResource,
+    };
   },
   methods: {
     setSelectedTab(tab) {
-      this.selectedTab = tab
+      this.selectedTab = tab;
     },
     addResource(title, description, url) {
       const newResource = {
@@ -57,19 +62,25 @@ export default {
         title,
         description,
         link: url,
-      }
+      };
 
-      this.storedResources.unshift(newResource)
-      this.selectedTab = 'stored-resources'
+      this.storedResources.unshift(newResource);
+      this.selectedTab = 'stored-resources';
+    },
+    removeResource(resId) {
+      const idx = this.storedResources.findIndex((res) => res.id === resId);
+      this.storedResources.splice(idx, 1);
+
+      console.log(this.storedResources);
     },
   },
   computed: {
     storedResButtonMode() {
-      return this.selectedTab === 'stored-resources' ? null : 'flat'
+      return this.selectedTab === 'stored-resources' ? null : 'flat';
     },
     addResButtonMode() {
-      return this.selectedTab === 'add-resource' ? null : 'flat'
+      return this.selectedTab === 'add-resource' ? null : 'flat';
     },
   },
-}
+};
 </script>

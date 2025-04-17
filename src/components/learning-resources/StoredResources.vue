@@ -1,18 +1,18 @@
 <template>
   <ul>
-    <LearningResource :key="id" v-for="{ id, ...res } in resources" v-bind="res" />
+    <LearningResource :key="res.id" v-for="res in resources" v-bind="res" />
   </ul>
 </template>
 
 <script>
-import LearningResource from './LearningResource.vue'
+import LearningResource from './LearningResource.vue';
 
 export default {
   components: {
     LearningResource,
   },
   inject: ['resources'],
-}
+};
 </script>
 
 <style scoped>
